@@ -66,6 +66,7 @@ export class CategoriasPage implements OnInit {
   guardarCategoria(nombre: string) {
     if (nombre && nombre.trim().length > 0) {
       this.categorias.push(nombre.trim());
+      localStorage.setItem('categorias', JSON.stringify(this.categorias));
     }
   }
 
