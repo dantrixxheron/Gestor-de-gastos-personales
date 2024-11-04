@@ -1,34 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
+import { RegistroModalPage } from '../registro-modal/registro-modal.page';
 
 @Component({
   selector: 'app-seguridad',
   templateUrl: './seguridad.page.html',
   styleUrls: ['./seguridad.page.scss'],
 })
-export class SeguridadPage implements OnInit {
+export class SeguridadPage {
   correoElectronico: string = '';
   contrasena: string = '';
-  usoBiometria: boolean = false;
-  protegerDatos: boolean = true;
 
-  constructor(private alertController: AlertController, private navController: NavController) {}
+  constructor(
+    private modalController: ModalController,
+    private alertController: AlertController,
+    private navController: NavController
+  ) {}
 
-  ngOnInit() {
-    this.cargarConfiguraciones();
+  // Función para abrir el modal de registro
+  async abrirRegistro() {
+    const modal = await this.modalController.create({
+      component: RegistroModalPage,
+    });
+    await modal.present();
   }
 
+  // Función para iniciar sesión
   async iniciarSesion() {
-    // Simulación de inicio de sesión
-    if (this.correoElectronico === 'usuario@ejemplo.com' && this.contrasena === 'contraseña123') {
+    // Obtener los usuarios registrados de localStorage
+    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+
+    // Verificar si el correo y la contraseña coinciden con un usuario registrado
+    const usuarioEncontrado = usuarios.find(
+      (user: any) => user.correo === this.correoElectronico && user.contrasena === this.contrasena
+    );
+
+    if (usuarioEncontrado) {
       const alert = await this.alertController.create({
         header: 'Éxito',
         message: 'Has iniciado sesión correctamente.',
         buttons: ['OK'],
       });
       await alert.present();
+
+      // Redirigir a la página de inicio después de que el usuario cierre la alerta
       alert.onDidDismiss().then(() => {
-        // Redirigir a la página de inicio (home)
         this.navController.navigateRoot('/home');
       });
     } else {
@@ -39,22 +55,5 @@ export class SeguridadPage implements OnInit {
       });
       await alert.present();
     }
-  }
-
-  cargarConfiguraciones() {
-    const config = localStorage.getItem('configuracionSeguridad');
-    if (config) {
-      const configuracion = JSON.parse(config);
-      this.usoBiometria = configuracion.usoBiometria || false;
-      this.protegerDatos = configuracion.protegerDatos || true;
-    }
-  }
-
-  guardarConfiguraciones() {
-    const configuracion = {
-      usoBiometria: this.usoBiometria,
-      protegerDatos: this.protegerDatos
-    };
-    localStorage.setItem('configuracionSeguridad', JSON.stringify(configuracion));
   }
 }
