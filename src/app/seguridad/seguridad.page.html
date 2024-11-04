@@ -1,7 +1,5 @@
-
 <ion-content padding>
   <div class="security-container">
-    
     <ion-card>
       <ion-card-header>
         <ion-card-title>Iniciar Sesión</ion-card-title>
@@ -17,23 +15,11 @@
         </ion-item>
         <ion-button expand="full" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
       </ion-card-content>
+      <ion-item lines="none" class="register-link">
+        <ion-label class="register-text" (click)="abrirRegistro()">¿No tienes una cuenta? Regístrate aquí</ion-label>
+      </ion-item>
     </ion-card>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Opciones de Seguridad</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-label>Usar Biometría</ion-label>
-          <ion-toggle [(ngModel)]="usoBiometria"></ion-toggle>
-        </ion-item>
-        <ion-item>
-          <ion-label>Proteger Datos Personales</ion-label>
-          <ion-toggle [(ngModel)]="protegerDatos"></ion-toggle>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-
+    <!-- Botón para abrir el modal de registro -->
   </div>
 </ion-content>

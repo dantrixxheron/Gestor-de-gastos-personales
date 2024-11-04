@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'seguridad',
     loadChildren: () => import('./seguridad/seguridad.module').then( m => m.SeguridadPageModule)
+  },  {
+    path: 'registro-modal',
+    loadChildren: () => import('./registro-modal/registro-modal.module').then( m => m.RegistroModalPageModule)
   },
+
 ];
 
 @NgModule({

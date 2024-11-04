@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro de Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Nombre Completo</ion-label>
+        <ion-input [(ngModel)]="nombreUsuario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Número Celular</ion-label>
+        <ion-input type="tel" [(ngModel)]="numeroCelular"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-input type="email" [(ngModel)]="correoRegistro"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="contrasenaRegistro"></ion-input>
+      </ion-item>
+      <ion-note color="medium">
+        La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un carácter especial.
+      </ion-note>
+      <ion-button expand="full" (click)="registrarUsuario()">Registrar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
