@@ -59,6 +59,8 @@ goBack() {
       };
       this.gastos.push(nuevoGasto);
       localStorage.setItem('gastos', JSON.stringify(this.gastos));
+      const sumaGastos = this.gastos.reduce((total, gasto) => total + gasto.monto, 0);
+      localStorage.setItem('totalGastos', sumaGastos);
       this.limpiarFormulario();
     } else {
       alert(`Por favor, completa todos los campos requeridos.`);
@@ -68,6 +70,9 @@ goBack() {
   // Eliminar un gasto de la lista
   eliminarGasto(gasto: any) {
     this.gastos = this.gastos.filter(g => g !== gasto);
+    localStorage.setItem('gastos', JSON.stringify(this.gastos));
+    const sumaGastos = this.gastos.reduce((total, gasto) => total + gasto.monto, 0);
+    localStorage.setItem('totalGastos', sumaGastos);
   }
 
   // Editar un gasto (carga los datos al formulario)
