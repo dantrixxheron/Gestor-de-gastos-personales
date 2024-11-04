@@ -1,0 +1,7 @@
+{
+  "name": "gastos_personales",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
