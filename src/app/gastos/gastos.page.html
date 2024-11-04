@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gastos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="form-container">
+    <ion-item>
+      <ion-label position="floating">Monto del Gasto</ion-label>
+      <ion-input type="number" [(ngModel)]="monto" placeholder="Ej: 100"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Categoría del Gasto</ion-label>
+      <ion-select [(ngModel)]="categoria" placeholder="Selecciona una categoría">
+        <ion-select-option value="comida">Comida</ion-select-option>
+        <ion-select-option value="transporte">Transporte</ion-select-option>
+        <ion-select-option value="entretenimiento">Entretenimiento</ion-select-option>
+        <ion-select-option value="otros">Otros</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha del Gasto</ion-label>
+      <ion-datetime [(ngModel)]="fecha"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Notas</ion-label>
+      <ion-textarea [(ngModel)]="notas" placeholder="Opcional..."></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="full" (click)="agregarGasto()" color="secondary">Agregar Gasto</ion-button>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let gasto of gastos" class="gasto-item">
+      <ion-label>
+        <h2>${{ gasto.monto }} <span class="categoria">{{ gasto.categoria }}</span></h2>
+        <p class="fecha">{{ gasto.fecha | date:'shortDate' }}</p>
+        <p class="notas">{{ gasto.notas }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="danger" (click)="eliminarGasto(gasto)">Eliminar</ion-button>
+        <ion-button color="primary" (click)="editarGasto(gasto)">Editar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

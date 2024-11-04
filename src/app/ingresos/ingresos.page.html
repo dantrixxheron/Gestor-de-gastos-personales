@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ingresos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="form-container">
+    <ion-item>
+      <ion-label position="floating">Monto del Ingreso</ion-label>
+      <ion-input type="number" [(ngModel)]="monto" placeholder="Ej: 2000"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fuente del Ingreso</ion-label>
+      <ion-select [(ngModel)]="fuente" placeholder="Selecciona una fuente">
+        <ion-select-option value="salario">Salario</ion-select-option>
+        <ion-select-option value="freelance">Freelance</ion-select-option>
+        <ion-select-option value="otros">Otros</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha del Ingreso</ion-label>
+      <ion-datetime [(ngModel)]="fecha"></ion-datetime>
+    </ion-item>
+
+    <ion-button expand="full" (click)="agregarIngreso()" color="secondary">Agregar Ingreso</ion-button>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let ingreso of ingresos" class="ingreso-item">
+      <ion-label>
+        <h2>{{ ingreso.monto }} <span class="fuente">{{ ingreso.fuente }}</span></h2>
+        <p class="fecha">{{ ingreso.fecha | date:'shortDate' }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="danger" (click)="eliminarIngreso(ingreso)">Eliminar</ion-button>
+        <ion-button color="primary" (click)="editarIngreso(ingreso)">Editar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

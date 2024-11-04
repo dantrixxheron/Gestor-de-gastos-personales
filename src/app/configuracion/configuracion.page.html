@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="settings-container">
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Personalizar Categorías</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Nueva Categoría de Gastos</ion-label>
+          <ion-input [(ngModel)]="nuevaCategoriaGasto"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="agregarCategoriaGasto()">Agregar Categoría</ion-button>
+
+        <h3>Categorías de Gastos</h3>
+        <ion-list>
+          <ion-item *ngFor="let categoria of categoriasGastos">
+            {{ categoria }}
+            <ion-button color="danger" slot="end" (click)="eliminarCategoriaGasto(categoria)">Eliminar</ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Notificaciones</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Alertas de Gastos</ion-label>
+          <ion-toggle [(ngModel)]="alertasGastos"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label>Recordatorios de Presupuesto</ion-label>
+          <ion-toggle [(ngModel)]="recordatoriosPresupuesto"></ion-toggle>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Idioma y Moneda</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Idioma</ion-label>
+          <ion-select [(ngModel)]="idiomaSeleccionado">
+            <ion-select-option value="es">Español</ion-select-option>
+            <ion-select-option value="en">Inglés</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Moneda</ion-label>
+          <ion-select [(ngModel)]="monedaSeleccionada">
+            <ion-select-option value="usd">USD</ion-select-option>
+            <ion-select-option value="eur">EUR</ion-select-option>
+            <ion-select-option value="mxn">MXN</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

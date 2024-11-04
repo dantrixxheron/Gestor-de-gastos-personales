@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Presupuestos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="form-container">
+    <ion-item>
+      <ion-label position="floating">Categoría Presupuestaria</ion-label>
+      <ion-input [(ngModel)]="categoria" placeholder="Ej: Alimentación"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Monto Asignado</ion-label>
+      <ion-input type="number" [(ngModel)]="monto" placeholder="Ej: 500"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" (click)="agregarPresupuesto()" color="secondary">Agregar Presupuesto</ion-button>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let presupuesto of presupuestos" class="presupuesto-item">
+      <ion-label>
+        <h2>{{ presupuesto.categoria }}: {{ presupuesto.monto | currency }}</h2>
+        <p *ngIf="presupuesto.superado" class="alert">¡Presupuesto Superado!</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="danger" (click)="eliminarPresupuesto(presupuesto)">Eliminar</ion-button>
+        <ion-button color="primary" (click)="editarPresupuesto(presupuesto)">Editar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

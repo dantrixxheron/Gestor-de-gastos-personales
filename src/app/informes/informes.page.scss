@@ -1,0 +1,19 @@
+ion-header {
+    background-color: #4a90e2; /* Color primario más atractivo */
+    color: white;
+  }
+  
+  .chart-container {
+    margin: 20px;
+  }
+  
+  canvas {
+    width: 100% !important; /* Asegurar que los gráficos se muestren correctamente */
+    height: 300px !important; /* Altura para los gráficos */
+    margin-bottom: 20px; /* Espaciado entre gráficos */
+  }
+  
+  ion-card {
+    margin: 20px 0; /* Margen para el card de resumen */
+  }
+  

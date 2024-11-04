@@ -1,0 +1,39 @@
+
+<ion-content padding>
+  <div class="security-container">
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Iniciar Sesión</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input type="email" [(ngModel)]="correoElectronico"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="contrasena"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Opciones de Seguridad</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Usar Biometría</ion-label>
+          <ion-toggle [(ngModel)]="usoBiometria"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label>Proteger Datos Personales</ion-label>
+          <ion-toggle [(ngModel)]="protegerDatos"></ion-toggle>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

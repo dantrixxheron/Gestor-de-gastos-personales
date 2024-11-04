@@ -1,27 +1,59 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-toolbar {
+  --background: #12854a; // Cambia el color del encabezado
+  color: #ffffff;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.financial-card {
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+.financial-card:hover {
+  transform: scale(1.02);
+}
 
-  color: #8c8c8c;
+/* Colores para cada tarjeta */
+.ingresos-card {
+  background-color: #53ffa6; // Color claro para ingresos
+}
 
+.gastos-card {
+  background-color: #ff6d83; // Color claro para gastos
+}
+
+.saldo-card {
+  background-color: #adacf7; // Color claro para saldo
+}
+
+ion-card-title {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #424242;
+}
+
+ion-card-content h2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #212121;
   margin: 0;
 }
 
-#container a {
-  text-decoration: none;
+/* Colores específicos para los valores financieros */
+.ingresos {
+  color: #00796b; // Color oscuro para ingresos
+}
+
+.gastos {
+  color: #d32f2f; // Color oscuro para gastos
+}
+
+.saldo {
+  color: #388e3c; // Color oscuro para saldo
+}
+
+/* Espaciado interno en cada tarjeta */
+ion-card-header,
+ion-card-content {
+  padding: 16px;
 }

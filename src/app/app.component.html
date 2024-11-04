@@ -1,3 +1,26 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- Sidebar menu -->
+  <ion-menu content-id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Gastos personales</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/gastos" routerDirection="root" (click)="cerrarMenu()">Gastos</ion-item>
+        <ion-item routerLink="/ingresos" routerDirection="root" (click)="cerrarMenu()">Ingresos</ion-item>
+        <ion-item routerLink="/presupuestos" routerDirection="root" (click)="cerrarMenu()">Presupuestos</ion-item>
+        <ion-item routerLink="/informes" routerDirection="root" (click)="cerrarMenu()">Informes</ion-item>
+        <ion-item routerLink="/configuracion" routerDirection="root" (click)="cerrarMenu()">Configuración</ion-item>
+        <ion-item routerLink="/acerca-de" routerDirection="root" (click)="cerrarMenu()">Acerca de</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Main content -->
+  <ion-content id="main-content">
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
 </ion-app>
+
