@@ -16,15 +16,23 @@ export class HomePage implements OnInit {
     this.cargarResumenFinanciero();
   }
 
+  ionViewWillEnter() {
+    this.cargarResumenFinanciero();
+  }
+
   cargarResumenFinanciero() {
-    // Obtén los datos almacenados en el localStorage
+    // Leer los valores de ingresos y gastos desde localStorage
     const ingresos = localStorage.getItem('totalIngresos');
     const gastos = localStorage.getItem('totalGastos');
-    const saldo = localStorage.getItem('saldo');
 
-    // Convierte los datos a número y asigna a las variables
+    // Convertir los valores a número y asignarlos a las variables
     this.totalIngresos = ingresos ? parseFloat(ingresos) : 0;
     this.totalGastos = gastos ? parseFloat(gastos) : 0;
-    this.saldo = saldo ? parseFloat(saldo) : this.totalIngresos - this.totalGastos;
+
+    // Calcular el saldo como la diferencia entre ingresos y gastos
+    this.saldo = this.totalIngresos - this.totalGastos;
+
+    // Opcional: almacenar el saldo actualizado en localStorage para referencia
+    localStorage.setItem('saldo', this.saldo.toString());
   }
 }
