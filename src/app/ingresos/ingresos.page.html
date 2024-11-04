@@ -1,40 +1,63 @@
 <ion-header>
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Ingresos</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content padding>
   <div class="form-container">
+    <!-- Campo de Monto -->
     <ion-item>
-      <ion-label position="floating">Monto del Ingreso</ion-label>
+      <ion-label position="stacked">Monto del Ingreso</ion-label>
       <ion-input type="number" [(ngModel)]="monto" placeholder="Ej: 2000"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Fuente del Ingreso</ion-label>
-      <ion-select [(ngModel)]="fuente" placeholder="Selecciona una fuente">
-        <ion-select-option value="salario">Salario</ion-select-option>
-        <ion-select-option value="freelance">Freelance</ion-select-option>
-        <ion-select-option value="otros">Otros</ion-select-option>
+    <!-- Selección de Categoría con botón para añadir nuevas -->
+    <ion-item style="margin: 5px;">
+      <ion-label position="stacked">Categoría del Ingreso</ion-label>
+      <ion-select [(ngModel)]="categoria" placeholder="Selecciona una categoría">
+        <ion-select-option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</ion-select-option>
       </ion-select>
+      <span style="font-size: 12px; color: gray; padding-bottom: 5px; background-color:none">
+        Si no has encontrado la categoría, <strong (click)="irACategorias()" style="cursor: pointer;">añádela aquí</strong>.
+      </span>
     </ion-item>
 
+    <!-- Selección de Fecha con ventana emergente -->
     <ion-item>
-      <ion-label position="floating">Fecha del Ingreso</ion-label>
-      <ion-datetime [(ngModel)]="fecha"></ion-datetime>
+      <ion-label position="stacked">Fecha del Ingreso</ion-label>
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
     </ion-item>
 
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime [showDefaultButtons]="true" id="datetime"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+    <!-- Campo de Notas -->
+    <ion-item>
+      <ion-label position="stacked">Notas</ion-label>
+      <ion-textarea [(ngModel)]="notas" placeholder="Opcional..."></ion-textarea>
+    </ion-item>
+
+    <!-- Botón para Agregar Ingreso -->
     <ion-button expand="full" (click)="agregarIngreso()" color="secondary">Agregar Ingreso</ion-button>
+    <ion-button expand="full" (click)="goBack()" color="danger">Cancelar</ion-button>
   </div>
 
+  <!-- Lista de Ingresos -->
   <ion-list>
     <ion-item *ngFor="let ingreso of ingresos" class="ingreso-item">
       <ion-label>
-        <h2>{{ ingreso.monto }} <span class="fuente">{{ ingreso.fuente }}</span></h2>
+        <h2>${{ ingreso.monto }} <span class="categoria">{{ ingreso.categoria }}</span></h2>
         <p class="fecha">{{ ingreso.fecha | date:'shortDate' }}</p>
+        <p class="notas">{{ ingreso.notas }}</p>
       </ion-label>
       <ion-buttons slot="end">
         <ion-button color="danger" (click)="eliminarIngreso(ingreso)">Eliminar</ion-button>
