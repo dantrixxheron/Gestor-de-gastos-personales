@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'registro-modal',
     loadChildren: () => import('./registro-modal/registro-modal.module').then( m => m.RegistroModalPageModule)
   },
+  {
+    path: 'categorias',
+    loadChildren: () => import('./categorias/categorias.module').then( m => m.CategoriasPageModule)
+  },
 
 ];
 

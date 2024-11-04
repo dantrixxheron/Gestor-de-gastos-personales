@@ -23,8 +23,8 @@ export class HomePage implements OnInit {
     const saldo = localStorage.getItem('saldo');
 
     // Convierte los datos a número y asigna a las variables
-    this.totalIngresos = ingresos ? parseFloat(ingresos) : 9990;
-    this.totalGastos = gastos ? parseFloat(gastos) : 8850;
+    this.totalIngresos = ingresos ? parseFloat(ingresos) : 0;
+    this.totalGastos = gastos ? parseFloat(gastos) : 0;
     this.saldo = saldo ? parseFloat(saldo) : this.totalIngresos - this.totalGastos;
   }
 }

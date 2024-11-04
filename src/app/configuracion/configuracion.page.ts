@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-configuracion',
@@ -13,25 +14,15 @@ export class ConfiguracionPage implements OnInit {
   idiomaSeleccionado: string = 'es';
   monedaSeleccionada: string = 'usd';
 
-  constructor() {}
+  constructor(private navController: NavController) {}
 
   ngOnInit() {
     this.cargarConfiguraciones();
   }
 
   agregarCategoriaGasto() {
-    if (this.nuevaCategoriaGasto) {
-      this.categoriasGastos.push(this.nuevaCategoriaGasto);
-      this.nuevaCategoriaGasto = '';
-      this.guardarConfiguraciones();
-    } else {
-      alert('Por favor, ingresa una categoría válida.');
-    }
-  }
+    this.navController.navigateRoot('/categorias');
 
-  eliminarCategoriaGasto(categoria: string) {
-    this.categoriasGastos = this.categoriasGastos.filter(c => c !== categoria);
-    this.guardarConfiguraciones();
   }
 
   cargarConfiguraciones() {
