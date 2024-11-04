@@ -2,7 +2,18 @@ ion-header {
     background-color: #4a90e2; /* Color primario más atractivo */
     color: white;
   }
-  
+  ion-label {
+    font-weight: bold;
+    font-size:xx-large;
+    padding-bottom: 5px;
+  }
+  ion-item{
+    padding: 5px;
+  }
+  ion-datetime-button{
+    font-size: 1.5em;
+    margin: 8px 0px 8px 0px;
+  }
   .form-container {
     margin: 20px;
     padding: 15px;

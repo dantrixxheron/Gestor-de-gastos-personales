@@ -1,41 +1,58 @@
 <ion-header>
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Gastos</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
   <div class="form-container">
+    <!-- Campo de Monto -->
     <ion-item>
-      <ion-label position="floating">Monto del Gasto</ion-label>
+      <ion-label position="stacked">Monto del Gasto</ion-label>
       <ion-input type="number" [(ngModel)]="monto" placeholder="Ej: 100"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Categoría del Gasto</ion-label>
+    <!-- Selección de Categoría con botón para añadir nuevas -->
+    <ion-item style="margin: 5px;">
+      <ion-label position="stacked">Categoría del Gasto</ion-label>
       <ion-select [(ngModel)]="categoria" placeholder="Selecciona una categoría">
-        <ion-select-option value="comida">Comida</ion-select-option>
-        <ion-select-option value="transporte">Transporte</ion-select-option>
-        <ion-select-option value="entretenimiento">Entretenimiento</ion-select-option>
-        <ion-select-option value="otros">Otros</ion-select-option>
+        <ion-select-option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</ion-select-option>
       </ion-select>
+      <span style="font-size: 12px; color: gray; padding-bottom: 5px; background-color:none">
+        Si no has encontrado la categoría, <strong (click)="irACategorias()" style="cursor: pointer;">añádela aquí</strong>.
+      </span>
+    </ion-item>
+      
+    
+
+    <!-- Selección de Fecha con ventana emergente -->
+    <ion-item>
+      <ion-label position="stacked">Fecha del Gasto</ion-label>
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Fecha del Gasto</ion-label>
-      <ion-datetime [(ngModel)]="fecha"></ion-datetime>
-    </ion-item>
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime [showDefaultButtons]="true" id="datetime"></ion-datetime>
+      </ng-template>
+    </ion-modal>
 
+    <!-- Campo de Notas -->
     <ion-item>
-      <ion-label position="floating">Notas</ion-label>
+      <ion-label position="stacked">Notas</ion-label>
       <ion-textarea [(ngModel)]="notas" placeholder="Opcional..."></ion-textarea>
     </ion-item>
 
+    <!-- Botón para Agregar Gasto -->
     <ion-button expand="full" (click)="agregarGasto()" color="secondary">Agregar Gasto</ion-button>
+    <ion-button expand="full" (click)="goBack()" color="danger">Cancelar</ion-button>
   </div>
 
+  <!-- Lista de Gastos -->
   <ion-list>
     <ion-item *ngFor="let gasto of gastos" class="gasto-item">
       <ion-label>
