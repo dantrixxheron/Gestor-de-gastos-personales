@@ -19,7 +19,8 @@ export class GastosPage {
   constructor(private navCtrl: NavController) {
     this.monto = 0;
     this.categoria = '';
-    this.fecha = '';
+    //asignar fecha por si no se selecciona
+    this.fecha = new Date().toISOString().substring(0, 10);
     this.notas = '';
   }
   ngOnInit() {
