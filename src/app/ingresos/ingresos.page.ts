@@ -19,7 +19,7 @@ export class IngresosPage implements OnInit {
   constructor(private navCtrl: NavController) {
     this.monto = 0;
     this.categoria = '';
-    this.fecha = '';
+    this.fecha = new Date().toISOString().substring(0, 10);
     this.notas = '';
   }
 
