@@ -13,6 +13,8 @@ export class IngresosPage implements OnInit {
   notas: string;
   ingresos: any[] = [];
   categorias: string[] = []; // Lista de categorías de ingresos
+  editing: boolean = false;
+  ingresoAEditar: any = null;
 
   constructor(private navCtrl: NavController) {
     this.monto = 0;
@@ -52,41 +54,61 @@ export class IngresosPage implements OnInit {
 
   // Agregar un ingreso a la lista
   agregarIngreso() {
-    if (this.monto && this.categoria) {
-      if (this.fecha == '') {
-        this.fecha = new Date().toISOString().slice(0, 10);
-      }
-      const nuevoIngreso = {
+    if (this.monto && this.categoria && this.fecha) {
+      const nuevoGasto = {
         monto: this.monto,
         categoria: this.categoria,
         fecha: this.fecha,
         notas: this.notas,
       };
-      this.ingresos.push(nuevoIngreso);
+  
+      if (this.editing) {
+        // Estamos editando, actualizamos el gasto
+        this.ingresos = this.ingresos.map(g => {
+          if (g === this.ingresoAEditar) {
+            return nuevoGasto;
+          }
+          return g;
+        });
+        this.editing = false;
+        this.ingresoAEditar = null;
+      } else {
+        // Estamos agregando, añadimos el nuevo gasto
+        this.ingresos.push(nuevoGasto);
+      }
+  
       localStorage.setItem('ingresos', JSON.stringify(this.ingresos));
-      const sumaIngresos = this.ingresos.reduce((total, ingreso) => total + ingreso.monto, 0);
-      localStorage.setItem('totalIngresos', sumaIngresos.toString());
+      const sumaIngresos = this.ingresos.reduce((total, gasto) => total + gasto.monto, 0);
+      localStorage.setItem('totalIngresos', sumaIngresos);
       this.limpiarFormulario();
     } else {
       alert('Por favor, completa todos los campos requeridos.');
     }
   }
-
+  onDateTimeChange(event: any) {
+    this.fecha = event.detail.value;
+  }
   // Eliminar un ingreso de la lista
   eliminarIngreso(ingreso: any) {
     this.ingresos = this.ingresos.filter(i => i !== ingreso);
     localStorage.setItem('ingresos', JSON.stringify(this.ingresos));
-    const sumaIngresos = this.ingresos.reduce((total, ingreso) => total + ingreso.monto, 0);
-    localStorage.setItem('totalIngresos', sumaIngresos.toString());
+    const sumaIngresos = this.ingresos.reduce((total, gasto) => total + gasto.monto, 0);
+    localStorage.setItem('totalIngresos', sumaIngresos);
   }
 
-  // Editar un ingreso (carga los datos al formulario)
+  cancelarEdicion() {
+    this.limpiarFormulario();
+    this.editing = false;
+    this.ingresoAEditar = null;
+  }
+  // Editar un gasto (carga los datos al formulario)
   editarIngreso(ingreso: any) {
     this.monto = ingreso.monto;
     this.categoria = ingreso.categoria;
     this.fecha = ingreso.fecha;
     this.notas = ingreso.notas;
-    this.eliminarIngreso(ingreso);
+    this.ingresoAEditar = ingreso;
+    this.editing = true;
   }
 
   // Limpiar el formulario después de guardar un ingreso
