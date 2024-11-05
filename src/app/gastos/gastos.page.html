@@ -27,8 +27,6 @@
       </span>
     </ion-item>
       
-    
-
     <!-- Selección de Fecha con ventana emergente -->
     <ion-item>
       <ion-label position="stacked">Fecha del Gasto</ion-label>
@@ -37,7 +35,6 @@
 
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <!--<ion-datetime id="datetime" (ionChange)="onDateTimeChange($event)"></ion-datetime>-->
         <ion-datetime [showDefaultButtons]="true" id="datetime" (ionChange)="onDateTimeChange($event)"></ion-datetime>
       </ng-template>
     </ion-modal>
