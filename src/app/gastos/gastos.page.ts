@@ -1,4 +1,4 @@
-import { Component, viewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, IonModal } from '@ionic/angular';
 
 @Component({
@@ -13,6 +13,8 @@ export class GastosPage {
   notas: string;
   gastos: any[] = [];
   categorias: string[] = []; // Lista de categorías cargadas
+  editing: boolean = false;
+  gastoAEditar: any = null;
 
   constructor(private navCtrl: NavController) {
     this.monto = 0;
@@ -47,26 +49,40 @@ goBack() {
 
   // Agregar un gasto a la lista
   agregarGasto() {
-    if (this.monto && this.categoria) {
-      if(this.fecha == ''){
-        this.fecha = new Date().toISOString().slice(0, 10);
-      }
+    if (this.monto && this.categoria && this.fecha) {
       const nuevoGasto = {
         monto: this.monto,
         categoria: this.categoria,
         fecha: this.fecha,
         notas: this.notas,
       };
-      this.gastos.push(nuevoGasto);
+  
+      if (this.editing) {
+        // Estamos editando, actualizamos el gasto
+        this.gastos = this.gastos.map(g => {
+          if (g === this.gastoAEditar) {
+            return nuevoGasto;
+          }
+          return g;
+        });
+        this.editing = false;
+        this.gastoAEditar = null;
+      } else {
+        // Estamos agregando, añadimos el nuevo gasto
+        this.gastos.push(nuevoGasto);
+      }
+  
       localStorage.setItem('gastos', JSON.stringify(this.gastos));
       const sumaGastos = this.gastos.reduce((total, gasto) => total + gasto.monto, 0);
       localStorage.setItem('totalGastos', sumaGastos);
       this.limpiarFormulario();
     } else {
-      alert(`Por favor, completa todos los campos requeridos.`);
+      alert('Por favor, completa todos los campos requeridos.');
     }
   }
-
+  onDateTimeChange(event: any) {
+    this.fecha = event.detail.value;
+  }
   // Eliminar un gasto de la lista
   eliminarGasto(gasto: any) {
     this.gastos = this.gastos.filter(g => g !== gasto);
@@ -74,14 +90,19 @@ goBack() {
     const sumaGastos = this.gastos.reduce((total, gasto) => total + gasto.monto, 0);
     localStorage.setItem('totalGastos', sumaGastos);
   }
-
+  cancelarEdicion() {
+    this.limpiarFormulario();
+    this.editing = false;
+    this.gastoAEditar = null;
+  }
   // Editar un gasto (carga los datos al formulario)
   editarGasto(gasto: any) {
     this.monto = gasto.monto;
     this.categoria = gasto.categoria;
     this.fecha = gasto.fecha;
     this.notas = gasto.notas;
-    this.eliminarGasto(gasto);
+    this.gastoAEditar = gasto;
+    this.editing = true;
   }
 
   // Limpiar los campos del formulario después de guardar un gasto
