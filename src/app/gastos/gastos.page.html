@@ -59,8 +59,8 @@
         <p class="notas">{{ gasto.notas }}</p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button color="danger" (click)="eliminarGasto(gasto)">Eliminar</ion-button>
-        <ion-button color="primary" (click)="editarGasto(gasto)">Editar</ion-button>
+        <ion-button color="danger" (click)="eliminarGasto(gasto)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+        <ion-button color="primary" (click)="editarGasto(gasto)"><ion-icon name="create-outline"></ion-icon></ion-button>
       </ion-buttons>
     </ion-item>
   </ion-list>

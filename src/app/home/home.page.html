@@ -14,7 +14,7 @@
       <ion-col size="12">
         <ion-card class="financial-card ingresos-card" routerLink="/ingresos">
           <ion-card-header>
-            <ion-card-title>Total de Ingresos</ion-card-title>
+            <ion-card-title>Total de Ingresos <ion-icon name="cash-outline"></ion-icon></ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <h2 class="ingresos">{{ totalIngresos | currency }}</h2>
@@ -26,7 +26,7 @@
       <ion-col size="12">
         <ion-card class="financial-card gastos-card" routerLink="/gastos">
           <ion-card-header>
-            <ion-card-title>Total de Gastos</ion-card-title>
+            <ion-card-title>Total de Gastos <ion-icon name="pricetag-outline"></ion-icon></ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <h2 class="gastos">{{ totalGastos | currency }}</h2>
@@ -38,7 +38,7 @@
       <ion-col size="12">
         <ion-card class="financial-card saldo-card">
           <ion-card-header>
-            <ion-card-title>Saldo</ion-card-title>
+            <ion-card-title>Saldo <ion-icon name="wallet-outline"></ion-icon></ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <h2 class="saldo">{{ saldo | currency }}</h2>

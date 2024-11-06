@@ -21,11 +21,11 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label>Alertas de Gastos</ion-label>
+          <ion-label>Alertas de Gastos <ion-icon name="notifications-outline"></ion-icon></ion-label>
           <ion-toggle [(ngModel)]="alertasGastos"></ion-toggle>
         </ion-item>
         <ion-item>
-          <ion-label>Recordatorios de Presupuesto</ion-label>
+          <ion-label>Recordatorios de Presupuesto <ion-icon name="notifications-outline"></ion-icon></ion-label>
           <ion-toggle [(ngModel)]="recordatoriosPresupuesto"></ion-toggle>
         </ion-item>
       </ion-card-content>
@@ -37,14 +37,14 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label>Idioma</ion-label>
+          <ion-label>Idioma <ion-icon name="language-outline"></ion-icon></ion-label>
           <ion-select [(ngModel)]="idiomaSeleccionado">
             <ion-select-option value="es">Español</ion-select-option>
             <ion-select-option value="en">Inglés</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label>Moneda</ion-label>
+          <ion-label>Moneda <ion-icon name="cash-outline"></ion-icon></ion-label>
           <ion-select [(ngModel)]="monedaSeleccionada">
             <ion-select-option value="usd">USD</ion-select-option>
             <ion-select-option value="eur">EUR</ion-select-option>
