@@ -1,5 +1,5 @@
 # meAhorro
-You can find the Spanish version of this README. 🌎
+You can find the [Spanish version of this README](README.ES.md). 🌎
 ## Main Page
 ### Features and Components
 This is a simple home screen for the "meAhorro" app, where users can get a quick overview of their financial situation. Here is a description of each section:
